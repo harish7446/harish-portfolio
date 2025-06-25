@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Harish Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<audio id="jarvis-beep" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+<script>
+  window.onload = function () {
+    const welcome = new SpeechSynthesisUtterance("System online. Welcome, Harish.");
+    welcome.pitch = 1.2;
+    welcome.rate = 1;
+    welcome.volume = 1;
+     welcome.voice = speechSynthesis.getVoices().find(voice => voice.name.includes("Google") || voice.name.includes("English"));
+
+    speechSynthesis.speak(welcome);
+  }
+</script>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1> 
+       hello, I'm Harish 👋</h1>
+    <h1 class="typing">system online... Hello, I'm Harish</h1>
+    <p>Aspiring Front-End Developer</p>
+    <a href="projects.html" class="btn">View My Projects</a>
+  </section>
+
+</body>
+</html>
