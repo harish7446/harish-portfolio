@@ -77,3 +77,25 @@ a, button, .project, .contacts a, .nav-cta { -webkit-tap-highlight-color: transp
 @media (prefers-reduced-motion:reduce) {
   .touch-glow,.touch-ripple {display:none!important;animation:none!important;transition:none!important}
 }
+
+
+/* ===== HARISH OS — personal visual identity layer ===== */
+.system-panel{position:relative;margin:0 0 42px;padding:20px 22px;border:1px solid #39452a;background:linear-gradient(115deg,#12180e 0%,#0e110c 58%,#151b10 100%);overflow:hidden;isolation:isolate}
+.system-panel:before{content:"H";position:absolute;right:18px;top:-62px;font:800 13rem/.9 var(--sans);letter-spacing:-.12em;color:#c7ff4d08;z-index:-1;pointer-events:none}
+.system-top{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:15px;border-bottom:1px solid var(--line);font:500 .62rem var(--mono);letter-spacing:.09em;color:#b6c0a7}
+.system-live{display:flex;align-items:center;gap:8px;color:var(--lime)}
+.system-live i{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #c7ff4d99;animation:statusPulse 2.8s ease-in-out infinite}
+.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:20px 0}
+.system-grid>div{display:grid;gap:6px;align-content:start}
+.system-grid small{font-size:.57rem;color:#8e9a7c}
+.system-grid strong{font-size:.9rem;letter-spacing:-.025em}
+.system-grid span{font-size:.72rem;line-height:1.5;color:var(--muted)}
+.system-command{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding-top:14px;border-top:1px solid var(--line);font: .68rem var(--mono);color:#d7dfcb}
+.system-command .prompt{color:var(--lime)}
+.command-cursor{width:7px;height:13px;background:var(--lime);display:inline-block;animation:commandBlink 1s steps(2,start) infinite}
+.command-output{width:100%;padding-left:0;color:#8f9a81;font-size:.62rem}
+@keyframes commandBlink{to{visibility:hidden}}
+.system-panel{animation:systemEnter .85s var(--motion-ease) both}
+@keyframes systemEnter{from{opacity:0;transform:translateY(16px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:760px){.system-panel{margin-bottom:32px;padding:17px}.system-grid{grid-template-columns:1fr;gap:14px;padding:17px 0}.system-grid>div{grid-template-columns:92px 1fr;gap:3px 10px}.system-grid small{grid-row:span 2;padding-top:3px}.system-grid strong{font-size:.82rem}.system-grid span{font-size:.68rem}.system-top{font-size:.55rem;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.system-panel,.command-cursor,.system-live i{animation:none!important}}
