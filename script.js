@@ -5,7 +5,7 @@
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion || !("IntersectionObserver" in window)) return;
-  const targets = document.querySelectorAll(".hero .eyebrow,.hero h1,.hero-bottom,.ticker,.section > .label,.two,.heading,.project,.contact-intro,.contacts a");
+  const targets = document.querySelectorAll(".hero .eyebrow,.hero h1,.hero-bottom,.system-panel,.ticker,.section > .label,.two,.heading,.project,.skill-path article,.journey-list article,.contact-intro,.contacts a");
   if (!targets.length) return;
   targets.forEach((el,index) => {
     el.classList.add("reveal");
