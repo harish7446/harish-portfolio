@@ -110,3 +110,7 @@ a, button, .project, .contacts a, .nav-cta { -webkit-tap-highlight-color: transp
 .console-actions button:hover,.console-actions button:focus-visible{border-color:var(--lime);color:var(--lime);background:#c7ff4d0b;transform:translateY(-1px);outline:none}
 @media(max-width:380px){.console-actions button{padding:7px 8px;font-size:.57rem}}
 @media(prefers-reduced-motion:reduce){.console-actions button{transition:none}}
+
+
+/* HARISH OS project briefs — clear, honest case-study details. */
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}.brief-grid section{padding:14px;border:1px solid #39452a;background:#0d110a;min-width:0}.brief-grid section small{font:.58rem var(--mono);letter-spacing:.08em;color:var(--lime)}.brief-grid section p{font-size:.78rem;line-height:1.65;margin:9px 0 0;color:var(--muted)}.brief-grid .brief-status{grid-column:1/-1}.brief-grid .brief-status p{color:#d0d9c4}@media(max-width:420px){dialog{padding:22px}.brief-grid{grid-template-columns:1fr}.brief-grid .brief-status{grid-column:auto}}
