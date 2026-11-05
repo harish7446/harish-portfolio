@@ -21,3 +21,23 @@
   },{threshold:.12,rootMargin:"0px 0px -35px 0px"});
   targets.forEach(el => observer.observe(el));
 })();
+
+/* Custom cursor with a smooth trailing ring. Disabled for touch and reduced motion. */
+(()=> {
+ "use strict";
+ const finePointer=window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+ const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(!finePointer||reduced)return;
+ const root=document.documentElement;root.classList.add("has-custom-cursor");
+ const dot=document.createElement("span"),ring=document.createElement("span");
+ dot.className="cursor-dot";ring.className="cursor-ring";
+ dot.setAttribute("aria-hidden","true");ring.setAttribute("aria-hidden","true");document.body.append(dot,ring);
+ let x=-100,y=-100,rx=-100,ry=-100,frame=0;
+ const render=()=>{rx+=(x-rx)*.17;ry+=(y-ry)*.17;dot.style.transform="translate3d("+(x-3)+"px,"+(y-3)+"px,0)";ring.style.transform="translate3d("+rx+"px,"+ry+"px,0)";if(Math.abs(x-rx)>.1||Math.abs(y-ry)>.1)frame=requestAnimationFrame(render);else frame=0};
+ document.addEventListener("pointermove",e=>{x=e.clientX;y=e.clientY;if(!frame)frame=requestAnimationFrame(render)},{passive:true});
+ document.addEventListener("pointerover",e=>{if(e.target.closest("a,button,[role='button'],.project"))root.classList.add("cursor-hover")});
+ document.addEventListener("pointerout",e=>{if(e.target.closest("a,button,[role='button'],.project"))root.classList.remove("cursor-hover")});
+ document.addEventListener("pointerdown",()=>root.classList.add("cursor-down"));
+ document.addEventListener("pointerup",()=>root.classList.remove("cursor-down"));
+ document.addEventListener("pointerleave",()=>root.classList.remove("cursor-hover","cursor-down"));
+})();
