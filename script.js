@@ -74,3 +74,27 @@
   clearTimeout(hideTimer);hideTimer=setTimeout(()=>glow&&glow.classList.remove("is-active"),180);
  },{passive:true});
 })();
+
+
+/* H/OS interactive command console — informative, no external dependencies. */
+(()=>{
+ "use strict";
+ const command=document.querySelector("#console-command");
+ const output=document.querySelector("#console-output");
+ const actions=document.querySelector(".console-actions");
+ if(!command||!output||!actions)return;
+ const responses={
+  about:{command:"whoami",output:"Harish Kumar G — aspiring software developer. Learning through practical projects."},
+  stack:{command:"stack",output:"NOW: HTML · CSS · JavaScript · Git & GitHub  |  LEARNING: React · Node.js · databases"},
+  method:{command:"approach",output:"Understand the problem → build a clear first version → test → improve. Useful over complicated."},
+  clear:{command:"clear",output:"Console cleared. Choose a command to explore H/OS."}
+ };
+ actions.addEventListener("click",event=>{
+  const button=event.target.closest("button[data-command]");
+  if(!button)return;
+  const result=responses[button.dataset.command];
+  if(!result)return;
+  command.textContent=result.command;
+  output.textContent=result.output;
+ });
+})();
