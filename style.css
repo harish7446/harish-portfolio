@@ -50,3 +50,30 @@ a, button, .project, .contacts a, .nav-cta { -webkit-tap-highlight-color: transp
   html.has-custom-cursor.cursor-hover .cursor-ring{width:54px;height:54px;margin:-24px 0 0 -24px;border-color:var(--lime);background:#c7ff4d12}
   html.has-custom-cursor.cursor-down .cursor-ring{width:27px;height:27px;margin:-10.5px 0 0 -10.5px}
 }
+
+
+/* Mobile cinematic touch feedback — preserves the existing layout and typography. */
+@media (hover:none) and (pointer:coarse) {
+  .touch-glow {
+    position:fixed;left:0;top:0;width:46px;height:46px;border-radius:50%;
+    pointer-events:none;z-index:9998;opacity:0;
+    background:radial-gradient(circle,#c7ff4d55 0%,#c7ff4d20 38%,transparent 72%);
+    transform:translate3d(-50%,-50%,0) scale(.55);
+    transition:opacity .18s ease,transform .28s ease;
+    will-change:transform,opacity;
+  }
+  .touch-glow.is-active {opacity:1;transform:translate3d(-50%,-50%,0) scale(1.35)}
+  .touch-ripple {
+    position:fixed;left:0;top:0;width:22px;height:22px;border:1px solid #c7ff4d99;
+    border-radius:50%;pointer-events:none;z-index:9997;
+    transform:translate3d(-50%,-50%,0) scale(.3);opacity:0;
+    animation:touch-ripple-out .72s ease-out forwards;
+  }
+  @keyframes touch-ripple-out {
+    0%{opacity:.8;transform:translate3d(-50%,-50%,0) scale(.3)}
+    100%{opacity:0;transform:translate3d(-50%,-50%,0) scale(3.8)}
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .touch-glow,.touch-ripple {display:none!important;animation:none!important;transition:none!important}
+}

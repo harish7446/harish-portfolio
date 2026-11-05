@@ -41,3 +41,36 @@
  document.addEventListener("pointerup",()=>root.classList.remove("cursor-down"));
  document.addEventListener("pointerleave",()=>root.classList.remove("cursor-hover","cursor-down"));
 })();
+
+
+// Mobile cinematic touch feedback: a brief lime glow follows the finger and taps create a ripple.
+(()=>{
+ const coarse=window.matchMedia("(hover:none) and (pointer:coarse)").matches;
+ const reduced=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+ if(!coarse||reduced)return;
+ let glow=null,hideTimer=0;
+ const ensureGlow=()=>{
+  if(glow)return glow;
+  glow=document.createElement("span");glow.className="touch-glow";glow.setAttribute("aria-hidden","true");
+  document.body.appendChild(glow);return glow;
+ };
+ const moveGlow=(x,y)=>{
+  const el=ensureGlow();el.style.left=x+"px";el.style.top=y+"px";
+  el.classList.add("is-active");clearTimeout(hideTimer);
+  hideTimer=setTimeout(()=>el&&el.classList.remove("is-active"),420);
+ };
+ document.addEventListener("touchstart",e=>{
+  const t=e.changedTouches&&e.changedTouches[0];if(!t)return;
+  moveGlow(t.clientX,t.clientY);
+  const ripple=document.createElement("span");ripple.className="touch-ripple";
+  ripple.style.left=t.clientX+"px";ripple.style.top=t.clientY+"px";
+  ripple.setAttribute("aria-hidden","true");document.body.appendChild(ripple);
+  ripple.addEventListener("animationend",()=>ripple.remove(),{once:true});
+ },{passive:true});
+ document.addEventListener("touchmove",e=>{
+  const t=e.touches&&e.touches[0];if(t)moveGlow(t.clientX,t.clientY);
+ },{passive:true});
+ document.addEventListener("touchend",()=>{
+  clearTimeout(hideTimer);hideTimer=setTimeout(()=>glow&&glow.classList.remove("is-active"),180);
+ },{passive:true});
+})();
